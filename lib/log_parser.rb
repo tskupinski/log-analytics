@@ -1,3 +1,5 @@
+require 'visit'
+
 class LogParser
   def initialize(log)
     @log = log
@@ -9,7 +11,8 @@ class LogParser
     log.each_line do |line|
       parsed_entry = line.split(' ')
 
-      result << { url: parsed_entry[0], origins: parsed_entry[1] }
+      # TODO: add keyword arguments to increase readability for Visit arguments?
+      result << Visit.new(parsed_entry[0], parsed_entry[1])
     end
 
     result

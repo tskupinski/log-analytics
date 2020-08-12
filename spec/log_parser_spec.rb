@@ -9,7 +9,8 @@ RSpec.describe LogParser do
     it 'returns list of parsed log entries' do
       result = subject.parse
 
-      expect(result[0]).to eq({ url: '/help_page/1', origins: '126.318.035.038' })
+      expect(result[0].url).to eq('/help_page/1')
+      expect(result[0].ip).to eq('126.318.035.038')
       expect(result.count).to eq(500)
     end
   end
