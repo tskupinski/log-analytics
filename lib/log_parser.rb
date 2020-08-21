@@ -12,7 +12,7 @@ class LogParser
       parsed_entry = line.split(' ')
 
       # TODO: add keyword arguments to increase readability for Visit arguments?
-      result << Visit.new(parsed_entry[0], parsed_entry[1])
+      result << Visit.new(url: parsed_entry[0], ip: parsed_entry[1])
     end
 
     result
