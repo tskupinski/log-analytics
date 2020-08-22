@@ -13,6 +13,18 @@ RSpec.describe Page do
     end
   end
 
+  describe '#visits_count' do
+    before do
+      subject.visit('126.318.035.038')
+      subject.visit('126.318.035.038')
+      subject.visit('444.701.448.104')
+    end
+
+    it 'returns visits count for page' do
+      expect(subject.visits_count).to eq(3)
+    end
+  end
+
   describe '#unique_visits_count' do
     before do
       subject.visit('126.318.035.038')

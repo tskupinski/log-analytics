@@ -10,6 +10,10 @@ class Page
     visits << ip
   end
 
+  def visits_count
+    visits.count
+  end
+
   def unique_visits_count
     unique_visits.count
   end

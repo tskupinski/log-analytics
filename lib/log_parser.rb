@@ -26,7 +26,7 @@ class LogParser
 
   # TODO: Where should these two methods live?
   def pages_sorted_by_visits_count
-    pages.sort_by { |p| p.visits.count }.reverse
+    pages.sort_by(&:visits_count).reverse
   end
 
   def pages_sorted_by_unique_visits_count
