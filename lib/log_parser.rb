@@ -30,7 +30,7 @@ class LogParser
   end
 
   def pages_sorted_by_unique_visits_count
-    pages.sort_by { |p| p.visits.uniq.count }.reverse
+    pages.sort_by(&:unique_visits_count).reverse
   end
 
   private
