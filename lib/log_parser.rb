@@ -2,7 +2,7 @@ require_relative './page'
 
 class LogParser
   def initialize(file)
-    @file = file
+    @file = File.open(file)
     @pages = []
   end
 
@@ -10,7 +10,6 @@ class LogParser
 
   def parse
     file.each_line do |line|
-      # TODO: Add some validations?
       path, ip = line.split(' ')
 
       page = find_or_create_page(path)
