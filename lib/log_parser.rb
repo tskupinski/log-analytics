@@ -23,8 +23,12 @@ class LogParser
     end
   end
 
-  def pages_sorted_by_visit_count
+  def pages_sorted_by_visits_count
     pages.sort_by { |p| p.visits.count }.reverse
+  end
+
+  def pages_sorted_by_unique_visits_count
+    pages.sort_by { |p| p.visits.uniq.count }.reverse
   end
 
   private
