@@ -1,24 +1,30 @@
-require 'visit'
+require 'page'
 
 class LogParser
-  def initialize(log)
-    @log = log
+  def initialize(file)
+    @file = file
+    @pages = []
   end
 
+  attr_reader :pages
+
   def parse
-    result = []
+    file.each_line do |line|
+      path, ip = line.split(' ')
+      page = pages.find { |p| p.path == path }
 
-    log.each_line do |line|
-      parsed_entry = line.split(' ')
-
-      # TODO: add keyword arguments to increase readability for Visit arguments?
-      result << Visit.new(url: parsed_entry[0], ip: parsed_entry[1])
+      if page
+        page.visits << ip
+      else
+        new_page = Page.new(path)
+        new_page.visits << ip
+        pages << new_page
+      end
     end
-
-    result
   end
 
   private
 
-  attr_reader :log
+  attr_reader :file
+  attr_writer :pages
 end
