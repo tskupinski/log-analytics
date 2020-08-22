@@ -6,6 +6,31 @@ RSpec.describe Session do
 
   let!(:file) { File.open('spec/fixtures/sample_webserver.log') }
 
+  describe '#find_or_create_page' do
+    it 'creates page with provided path' do
+      expect { subject.find_or_create_page('/example') }.to change(subject.pages, :count).from(0).to(1)
+    end
+
+    it 'returns the page' do
+      expect(subject.find_or_create_page('/example').path).to eq('/example')
+      expect(subject.find_or_create_page('/example')).to be_kind_of(Page)
+    end
+
+    context 'when the page of given path is already exists' do
+      let(:page) { Page.new('/example')  }
+
+      before { subject.pages << page }
+
+      it 'does not create new page' do
+        expect { subject.find_or_create_page('/example') }.not_to change(subject, :pages)
+      end
+
+      it 'returns this page' do
+        expect(subject.find_or_create_page('/example')).to eq(page)
+      end
+    end
+  end
+
   describe '#pages_sorted_by_visits_count' do
     before { subject.parse_file }
 
