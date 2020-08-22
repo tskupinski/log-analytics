@@ -1,4 +1,4 @@
-require 'page'
+require_relative './page'
 
 class LogParser
   def initialize(file)
