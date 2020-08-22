@@ -10,6 +10,7 @@ RSpec.describe Page do
 
     it 'registers visit using ip address' do
       expect { subject.visit(ip) }.to change(subject.visits, :count).from(0).to(1)
+      expect(subject.visits[0]).to eq('126.318.035.038')
     end
   end
 

@@ -7,6 +7,7 @@ class Page
   attr_reader :path, :visits
 
   def visit(ip)
+    # TODO: Have a struct to store IP?
     visits << ip
   end
 

@@ -10,17 +10,11 @@ class LogParser
 
   def parse
     file.each_line do |line|
+      # TODO: Add some validations?
       path, ip = line.split(' ')
 
-      page = pages.find { |p| p.path == path }
-
-      if page
-        page.visit(ip)
-      else
-        new_page = Page.new(path)
-        new_page.visit(ip)
-        pages << new_page
-      end
+      page = find_or_create_page(path)
+      page.visit(ip)
     end
   end
 
@@ -37,4 +31,16 @@ class LogParser
 
   attr_reader :file
   attr_writer :pages
+
+  def find_or_create_page(path)
+    find_page(path) || create_page(path)
+  end
+
+  def find_page(path)
+    pages.find { |p| p.path == path }
+  end
+
+  def create_page(path)
+    Page.new(path).tap { |p| pages << p }
+  end
 end
