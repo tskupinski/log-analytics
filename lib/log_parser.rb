@@ -23,6 +23,11 @@ class LogParser
     end
   end
 
+  def pages_sorted_by_visit_count
+   [] 
+
+  end
+
   private
 
   attr_reader :file
