@@ -17,11 +17,11 @@ RSpec.describe LogParser do
   describe '#pages_sorted_by_visit_count' do
     # TODO: fix the spec to set pages in before and than rely on variables comparison
     # before { subject.pages = [] }
-    
+
     context 'when there are pages' do
       before { subject.parse }
 
-      xit 'returns pages sorted by number of visits' do
+      it 'returns pages sorted by number of visits' do
         expect(subject.pages_sorted_by_visit_count[0].path).to eq('/help_page/1')
         expect(subject.pages_sorted_by_visit_count[1].path).to eq('/home')
       end

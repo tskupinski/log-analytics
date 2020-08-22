@@ -24,8 +24,7 @@ class LogParser
   end
 
   def pages_sorted_by_visit_count
-   [] 
-
+    pages.sort_by { |p| p.visits.count }.reverse
   end
 
   private
