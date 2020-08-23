@@ -15,7 +15,9 @@ RSpec.describe Analytics do
 
   describe '#register_visit' do
     it 'creates page with provided path' do
-      expect { subject.register_visit('/example', '111.222.333.444') }.to change(subject.pages, :count).from(0).to(1)
+      expect do
+        subject.register_visit('/example', '111.222.333.444')
+      end.to change(subject.pages, :count).from(0).to(1)
     end
 
     it 'adds ip to page visits' do
@@ -31,7 +33,9 @@ RSpec.describe Analytics do
       before { subject.pages << page }
 
       it 'does not create new page' do
-        expect { subject.register_visit('/example', '111.222.333.444') }.not_to change(subject, :pages)
+        expect do
+          subject.register_visit('/example', '111.222.333.444')
+        end.not_to change(subject, :pages)
       end
 
       it 'adds ip to page visits' do
