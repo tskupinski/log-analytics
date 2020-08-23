@@ -1,7 +1,7 @@
 require 'page'
 
 RSpec.describe Page do
-  subject { Page.new(path) }
+  subject { described_class.new(path) }
 
   let(:path) { '/home' }
 
