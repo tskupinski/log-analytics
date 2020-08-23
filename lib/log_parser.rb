@@ -11,7 +11,7 @@ class LogParser
       path, ip = line.split(' ')
 
       page = analytics.find_or_create_page(path)
-      page.visit(ip)
+      page.register_visit(ip)
     end
   end
 

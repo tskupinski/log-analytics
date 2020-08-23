@@ -6,7 +6,7 @@ class Page
 
   attr_reader :path, :visits
 
-  def visit(ip)
+  def register_visit(ip)
     visits << ip
   end
 
