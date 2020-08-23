@@ -4,8 +4,7 @@ require 'log_parser'
 RSpec.describe Analytics do
   subject { described_class.new }
 
-
-  describe '#parse' do
+  describe '#parse_file' do
     let!(:file_path) { 'spec/fixtures/sample_webserver.log' }
 
     it 'parses the log file' do
@@ -14,16 +13,16 @@ RSpec.describe Analytics do
     end
   end
 
-  describe '#find_or_create_page' do
+  describe '#register_visit' do
     it 'creates page with provided path' do
-      expect do
-        subject.find_or_create_page('/example')
-      end.to change(subject.pages, :count).from(0).to(1)
+      expect { subject.register_visit('/example', '111.222.333.444') }.to change(subject.pages, :count).from(0).to(1)
     end
 
-    it 'returns the page' do
-      expect(subject.find_or_create_page('/example').path).to eq('/example')
-      expect(subject.find_or_create_page('/example')).to be_kind_of(Page)
+    it 'adds ip to page visits' do
+      subject.register_visit('/example', '111.222.333.444')
+
+      expect(subject.pages[0].visits.count).to eq(1)
+      expect(subject.pages[0].visits[0]).to eq('111.222.333.444')
     end
 
     context 'when the page of given path is already exists' do
@@ -32,11 +31,14 @@ RSpec.describe Analytics do
       before { subject.pages << page }
 
       it 'does not create new page' do
-        expect { subject.find_or_create_page('/example') }.not_to change(subject, :pages)
+        expect { subject.register_visit('/example', '111.222.333.444') }.not_to change(subject, :pages)
       end
 
-      it 'returns this page' do
-        expect(subject.find_or_create_page('/example')).to eq(page)
+      it 'adds ip to page visits' do
+        subject.register_visit('/example', '111.222.333.444')
+
+        expect(subject.pages[0].visits.count).to eq(1)
+        expect(subject.pages[0].visits[0]).to eq('111.222.333.444')
       end
     end
   end

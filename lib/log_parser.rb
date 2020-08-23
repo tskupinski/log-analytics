@@ -9,8 +9,7 @@ class LogParser
     file.each_line do |line|
       path, ip = line.split(' ')
 
-      page = analytics.find_or_create_page(path)
-      page.register_visit(ip)
+      analytics.register_visit(path, ip)
     end
   end
 

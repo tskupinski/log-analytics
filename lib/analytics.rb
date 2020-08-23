@@ -14,8 +14,9 @@ class Analytics
     parser.parse(File.open(file_path))
   end
 
-  def find_or_create_page(path)
-    find_page(path) || create_page(path)
+  def register_visit(path, ip)
+    page = find_page(path) || create_page(path)
+    page.register_visit(ip)
   end
 
   def pages_sorted_by_visits_count
