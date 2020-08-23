@@ -2,12 +2,15 @@ require 'analytics'
 require 'log_parser'
 
 RSpec.describe Analytics do
-  subject { Analytics.new(file) }
+  subject { described_class.new }
 
-  let!(:file) { File.open('spec/fixtures/sample_webserver.log') }
 
   describe '#parse' do
+    let!(:file_path) { 'spec/fixtures/sample_webserver.log' }
+
     it 'parses the log file' do
+      expect(subject.parser).to receive(:parse)
+      subject.parse_file(file_path)
     end
   end
 
@@ -39,7 +42,9 @@ RSpec.describe Analytics do
   end
 
   describe '#pages_sorted_by_visits_count' do
-    before { subject.parse_file }
+    let!(:file_path) { 'spec/fixtures/sample_webserver.log' }
+
+    before { subject.parse_file(file_path) }
 
     it 'returns pages sorted by number of visits' do
       expect(subject.pages_sorted_by_visits_count[0].path).to eq('/help_page/1')
@@ -48,7 +53,9 @@ RSpec.describe Analytics do
   end
 
   describe '#pages_sorted_by_unique_visits_count' do
-    before { subject.parse_file }
+    let!(:file_path) { 'spec/fixtures/sample_webserver.log' }
+
+    before { subject.parse_file(file_path) }
 
     it 'returns pages sorted by number of visits' do
       expect(subject.pages_sorted_by_unique_visits_count[0].path).to eq('/home')

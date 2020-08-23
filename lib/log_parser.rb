@@ -1,12 +1,11 @@
 require_relative './page'
 
 class LogParser
-  def initialize(file, analytics)
-    @file = File.open(file)
+  def initialize(analytics)
     @analytics = analytics
   end
 
-  def parse
+  def parse(file)
     file.each_line do |line|
       path, ip = line.split(' ')
 

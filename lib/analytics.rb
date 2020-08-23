@@ -2,16 +2,16 @@ require_relative './log_parser'
 require_relative './printer'
 
 class Analytics
-  def initialize(file)
-    @parser = LogParser.new(file, self)
+  def initialize
+    @parser = LogParser.new(self)
     @printer = Printer
     @pages = []
   end
 
   attr_reader :pages, :parser, :printer
 
-  def parse_file
-    parser.parse
+  def parse_file(file_path)
+    parser.parse(File.open(file_path))
   end
 
   def find_or_create_page(path)
