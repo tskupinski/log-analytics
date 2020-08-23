@@ -7,7 +7,6 @@ class Page
   attr_reader :path, :visits
 
   def visit(ip)
-    # TODO: Have a struct to store IP?
     visits << ip
   end
 
@@ -20,8 +19,6 @@ class Page
   end
 
   private
-
-  attr_writer :visits
 
   def unique_visits
     visits.uniq

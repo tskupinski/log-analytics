@@ -6,8 +6,6 @@ class LogParser
     @analytics = analytics
   end
 
-  attr_reader :analytics
-
   def parse
     file.each_line do |line|
       path, ip = line.split(' ')
@@ -19,5 +17,5 @@ class LogParser
 
   private
 
-  attr_reader :file
+  attr_reader :file, :analytics
 end

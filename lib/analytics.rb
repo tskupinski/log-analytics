@@ -1,11 +1,14 @@
+require_relative './log_parser'
+require_relative './printer'
+
 class Analytics
-  # TODO: Inject parser and printer as dependencies
   def initialize(file)
     @parser = LogParser.new(file, self)
+    @printer = Printer
     @pages = []
   end
 
-  attr_reader :pages, :parser
+  attr_reader :pages, :parser, :printer
 
   def parse_file
     parser.parse
