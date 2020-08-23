@@ -16,7 +16,7 @@ class Analytics
 
   def register_visit(path, ip)
     page = find_page(path) || create_page(path)
-    page.register_visit(ip)
+    page.visit(ip)
   end
 
   def pages_sorted_by_visits_count

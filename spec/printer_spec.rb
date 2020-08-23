@@ -8,8 +8,8 @@ RSpec.describe Printer do
   let(:another_page) { Page.new('/contact') }
 
   before do
-    page.register_visit('111.222.333.444')
-    another_page.register_visit('111.222.333.444')
+    page.visit('111.222.333.444')
+    another_page.visit('111.222.333.444')
   end
 
   let(:pages) { [page, another_page] }
