@@ -8,13 +8,14 @@ RSpec.describe Analytics do
 
   describe '#parse' do
     it 'parses the log file' do
-
     end
   end
 
   describe '#find_or_create_page' do
     it 'creates page with provided path' do
-      expect { subject.find_or_create_page('/example') }.to change(subject.pages, :count).from(0).to(1)
+      expect do
+        subject.find_or_create_page('/example')
+      end.to change(subject.pages, :count).from(0).to(1)
     end
 
     it 'returns the page' do
@@ -23,7 +24,7 @@ RSpec.describe Analytics do
     end
 
     context 'when the page of given path is already exists' do
-      let(:page) { Page.new('/example')  }
+      let(:page) { Page.new('/example') }
 
       before { subject.pages << page }
 
