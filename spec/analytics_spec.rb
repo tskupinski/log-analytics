@@ -1,10 +1,16 @@
-require 'session'
+require 'analytics'
 require 'log_parser'
 
-RSpec.describe Session do
-  subject { Session.new(file) }
+RSpec.describe Analytics do
+  subject { Analytics.new(file) }
 
   let!(:file) { File.open('spec/fixtures/sample_webserver.log') }
+
+  describe '#parse' do
+    it 'parses the log file' do
+
+    end
+  end
 
   describe '#find_or_create_page' do
     it 'creates page with provided path' do

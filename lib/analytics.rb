@@ -1,4 +1,4 @@
-class Session
+class Analytics
   # TODO: Inject parser and printer as dependencies
   def initialize(file)
     @parser = LogParser.new(file, self)

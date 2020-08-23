@@ -1,18 +1,18 @@
 require_relative './page'
 
 class LogParser
-  def initialize(file, session)
+  def initialize(file, analytics)
     @file = File.open(file)
-    @session = session
+    @analytics = analytics
   end
 
-  attr_reader :session
+  attr_reader :analytics
 
   def parse
     file.each_line do |line|
       path, ip = line.split(' ')
 
-      page = session.find_or_create_page(path)
+      page = analytics.find_or_create_page(path)
       page.visit(ip)
     end
   end
